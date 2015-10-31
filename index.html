@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+		<title>Quiz</title>
+		<script src="libraries/angular.js"></script>
+
+		<script>
+			function ChannelsCtrl($scope) {
+				$scope.groupSize = 4;
+				$scope.pageSet = 0;
+				$scope.pageNumber = 0;
+				$scope.channels = [
+					{"id": "Товар-001"}, {"id": "Товар-002"}, {"id": "Товар-003"}, {"id": "Товар-004"},
+					{"id": "Товар-005"}, {"id": "Товар-006"}, {"id": "Товар-007"}, {"id": "Товар-008"},
+					{"id": "Товар-009"}, {"id": "Товар-010"}, {"id": "Товар-011"}, {"id": "Товар-012"},
+					{"id": "Товар-013"}, {"id": "Товар-014"}, {"id": "Товар-015"}, {"id": "Товар-016"},
+					{"id": "Товар-017"}, {"id": "Товар-018"}, {"id": "Товар-019"}, {"id": "Товар-020"},
+					{"id": "Товар-021"}, {"id": "Товар-022"}, {"id": "Товар-023"}, {"id": "Товар-024"},
+					{"id": "Товар-025"}, {"id": "Товар-026"}, {"id": "Товар-027"}, {"id": "Товар-028"},
+					{"id": "Товар-029"}, {"id": "Товар-030"}, {"id": "Товар-031"}, {"id": "Товар-032"}
+				];
+			}
+
+			var app = angular.module('app', [])
+
+			app.controller('ChannelsCtrl', ChannelsCtrl);
+
+			angular.bootstrap(document.body, ['app']);
+		</script>
+
+		<link href="libraries/bootstrap.css" rel="stylesheet"/>
+		<link href="libraries/bootstrap-theme.css" rel="stylesheet"/>
+</head>
+<body ng-controller="ChannelsCtrl">
+	<ul>
+		<li ng-repeat="channel in channels | limitTo: groupSize * ((groupSize * pageSet) + pageNumber + 1) | limitTo: -groupSize">
+			<p>{{channel.id}}</p>
+		</li>
+	</ul>
+	<p>Тип товара:
+			<label ng-repeat="n in [0,1]">
+		<input type="radio" name="pageSet" ng-model="$parent.pageSet" ng-value="n" />{{n}}
+			</label>
+	</p>
+	<p>Страница: 
+			<label ng-repeat="n in [0,1,2,3]">
+			<input type="radio" name="pageNumber" ng-model="$parent.pageNumber" ng-value="n" /> {{n}}
+			</label>
+	</p>
+</body>
+</html>
